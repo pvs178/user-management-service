@@ -2,6 +2,7 @@ import AppDataSource from '../config/data-source.js'
 import { User } from '../entities/User.js'
 import { CreateUserDto } from '../dto/CreateUserDto.js'
 import { LoginDto } from '../dto/LoginDto.js'
+import { UserResponseDto } from '../dto/UserResponseDto.js'
 import { hashPassword, comparePassword } from '../utils/password.js'
 import { generateToken } from '../utils/jwt.js'
 import { UserRole } from '../entities/User.js'
@@ -9,7 +10,7 @@ import { UserRole } from '../entities/User.js'
 export class AuthService {
   /**
    * @param {CreateUserDto} createUserDto
-   * @returns {Promise<Object>}
+   * @returns {Promise<{user: UserResponseDto, token: string}>}
    * @throws {Error}
    */
   async register(createUserDto) {
@@ -42,17 +43,15 @@ export class AuthService {
       role: user.role,
     })
 
-    delete user.password
-
     return {
-      user,
+      user: new UserResponseDto(user),
       token,
     }
   }
 
   /**
    * @param {LoginDto} loginDto
-   * @returns {Promise<Object>}
+   * @returns {Promise<{user: UserResponseDto, token: string}>}
    * @throws {Error}
    */
   async login(loginDto) {
@@ -72,10 +71,8 @@ export class AuthService {
       role: user.role,
     })
 
-    delete user.password
-
     return {
-      user,
+      user: new UserResponseDto(user),
       token,
     }
   }
