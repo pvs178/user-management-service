@@ -4,11 +4,11 @@ RESTful API service for user management with authentication and authorization.
 
 ## Tech Stack
 
-1) **Express.js** - Web framework
-2) **PostgreSQL** - Database
-3) **TypeORM** - ORM
-4) **JWT** - Authentication
-5) **bcrypt** - Password hashing
+1) Express.js
+2) PostgreSQL
+3) TypeORM
+4) JWT
+5) bcrypt
 
 ## Environment Variables
 

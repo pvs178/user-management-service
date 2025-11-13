@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "User Management Service with Express, PostgreSQL and TypeORM",
   "main": "src/app.js",
+  "type": "module",
   "scripts": {
     "start": "node src/app.js",
     "dev": "node --watch src/app.js",
