@@ -9,6 +9,7 @@ RESTful API service for user management with authentication and authorization.
 3) TypeORM
 4) JWT
 5) bcrypt
+6) Docker
 
 ## Environment Variables
 
@@ -22,6 +23,25 @@ JWT_EXPIRES_IN=24h
 ```
 
 ## Running
+
+### With Docker (Recommended)
+
+Start all services:
+```bash
+docker compose up --build
+```
+
+Run migrations:
+```bash
+docker compose exec app npm run migration:run
+```
+
+Stop services:
+```bash
+docker compose down
+```
+
+### Local Development
 
 Development:
 ```bash
