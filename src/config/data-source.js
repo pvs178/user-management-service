@@ -11,7 +11,7 @@ const AppDataSource = new DataSource({
   entities: ['src/entities/**/*.js'],
   migrations: ['src/migrations/**/*.js'],
   migrationsTableName: 'migrations',
-  migrationsRun: false,
+  migrationsRun: true,
 })
 
 export async function initDb() {

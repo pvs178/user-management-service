@@ -1,13 +1,4 @@
 export class UserResponseDto {
-  id
-  fullName
-  dateOfBirth
-  email
-  role
-  isActive
-  createdAt
-  updatedAt
-
   constructor(user) {
     this.id = user.id
     this.fullName = user.fullName
