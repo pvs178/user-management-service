@@ -26,14 +26,9 @@ JWT_EXPIRES_IN=24h
 
 ### With Docker (Recommended)
 
-Start all services:
+Start all services (migrations run automatically):
 ```bash
 docker compose up --build
-```
-
-Run migrations:
-```bash
-docker compose exec app npm run migration:run
 ```
 
 Stop services:
@@ -52,3 +47,59 @@ Production:
 ```bash
 npm start
 ```
+
+## API Endpoints
+
+### Authentication
+
+#### Register User
+- **POST** `/api/auth/register`
+- **Body:**
+  ```json
+  {
+    "fullName": "John Doe",
+    "dateOfBirth": "1990-01-01",
+    "email": "user@example.com",
+    "password": "SecurePass123",
+    "role": "user"
+  }
+  ```
+- **Response:** `{ "user": {...}, "token": "..." }`
+
+#### Login
+- **POST** `/api/auth/login`
+- **Body:**
+  ```json
+  {
+    "email": "user@example.com",
+    "password": "SecurePass123"
+  }
+  ```
+- **Response:** `{ "user": {...}, "token": "..." }`
+
+### User Management
+
+#### Get User by ID
+- **GET** `/api/users/:id`
+- **Headers:** `Authorization: Bearer <token>`
+- **Access:** Owner or Admin
+- **Response:** `{ "id": "...", "fullName": "...", ... }`
+
+#### Get All Users
+- **GET** `/api/users`
+- **Headers:** `Authorization: Bearer <token>`
+- **Access:** Admin only
+- **Query params:** `?page=1&limit=10`
+- **Response:** `{ "users": [...], "total": 10, "page": 1, "limit": 10 }`
+
+#### Block User
+- **PATCH** `/api/users/:id/block`
+- **Headers:** `Authorization: Bearer <token>`
+- **Access:** Owner or Admin
+- **Response:** `{ "id": "...", "isActive": false, ... }`
+
+### Health Check
+
+#### Health Status
+- **GET** `/health`
+- **Response:** `{ "status": "ok", "message": "User Management Service is running" }`
