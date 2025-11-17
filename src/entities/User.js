@@ -11,7 +11,7 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, name: 'full_name' }) // todo
   @IsNotEmpty()
   @MinLength(2)
   fullName
@@ -33,7 +33,7 @@ export class User {
   @MinLength(6)
   password
 
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
+  @Column({ type: 'varchar', length: 20, default: UserRole.USER })
   @IsEnum(UserRole)
   role
 

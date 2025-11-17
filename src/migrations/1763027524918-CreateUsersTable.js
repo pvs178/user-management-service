@@ -4,8 +4,6 @@ export class CreateUsersTable {
   name = '1763027524918-CreateUsersTable'
 
   async up(queryRunner) {
-    await queryRunner.query(`CREATE TYPE "user_role_enum" AS ENUM('admin', 'user')`)
-
     await queryRunner.createTable(
       new Table({
         name: 'users',
@@ -43,7 +41,8 @@ export class CreateUsersTable {
           },
           {
             name: 'role',
-            type: 'user_role_enum',
+            type: 'varchar',
+            length: '20',
             default: "'user'",
             isNullable: false,
           },
@@ -82,7 +81,6 @@ export class CreateUsersTable {
   async down(queryRunner) {
     await queryRunner.dropIndex('users', 'IDX_user_email')
     await queryRunner.dropTable('users')
-    await queryRunner.query(`DROP TYPE "user_role_enum"`)
   }
 }
 
