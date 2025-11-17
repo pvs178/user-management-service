@@ -11,7 +11,12 @@ export class UserController {
    */
   async getById(req, res) {
     try {
-      const { id } = req.params
+      const { id } = req.params || {}
+
+      if (!id) {
+        return res.status(400).json({ error: 'User ID is required' })
+      }
+
       const user = await this.userService.findById(id)
 
       if (!user) {
@@ -47,7 +52,12 @@ export class UserController {
    */
   async blockUser(req, res) {
     try {
-      const { id } = req.params
+      const { id } = req.params || {}
+
+      if (!id) {
+        return res.status(400).json({ error: 'User ID is required' })
+      }
+
       const user = await this.userService.blockUser(id)
 
       return res.status(200).json(user)
