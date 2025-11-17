@@ -22,7 +22,14 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again later.',
 })
 
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: 'Too many authentication attempts, please try again later.',
+})
+
 app.use('/api/', limiter)
+app.use('/api/auth', authLimiter)
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'User Management Service is running' })
