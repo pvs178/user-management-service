@@ -61,16 +61,18 @@ export class UserService {
   async blockUser(id) {
     const userRepository = AppDataSource.getRepository(User)
 
-    const user = await userRepository.findOne({
-      where: { id },
-    })
+    const result = await userRepository.update(
+      { id },
+      { isActive: false },
+    )
 
-    if (!user) {
+    if (result.affected === 0) {
       throw new Error('User not found')
     }
 
-    user.isActive = false
-    await userRepository.save(user)
+    const user = await userRepository.findOne({
+      where: { id },
+    })
 
     return new UserResponseDto(user)
   }
