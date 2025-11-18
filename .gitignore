@@ -10,6 +10,10 @@ build/
 .env.local
 .env.*.local
 
+*.pem
+jwt-private.pem
+jwt-public.pem
+
 # IDE
 .idea/
 .vscode/

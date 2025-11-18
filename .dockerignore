@@ -6,4 +6,7 @@ npm-debug.log
 README.md
 *.md
 .DS_Store
+*.pem
+jwt-private.pem
+jwt-public.pem
 

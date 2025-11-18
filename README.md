@@ -18,9 +18,34 @@ Create a `.env` file in the root directory:
 ```env
 PORT=3000
 DATABASE_URL=postgresql://user:password@localhost:5432/dbname
-JWT_SECRET=your-secret-key
+JWT_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----
+...
+-----END PRIVATE KEY-----"
+JWT_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----
+...
+-----END PUBLIC KEY-----"
 JWT_EXPIRES_IN=24h
 ```
+
+### Generating JWT Keys
+
+The service uses RS256 algorithm (RSA with SHA-256) for JWT signing. Generate key pair:
+
+```bash
+./scripts/generate-jwt-keys.sh
+```
+
+Or manually using OpenSSL:
+
+```bash
+# Generate private key
+openssl genrsa -out jwt-private.pem 2048
+
+# Generate public key
+openssl rsa -in jwt-private.pem -pubout -out jwt-public.pem
+```
+
+Then add the keys to `.env` file (keep private key secure, never commit it).
 
 ## Running
 

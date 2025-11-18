@@ -22,11 +22,11 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    env_file:
+      - .env
     environment:
       PORT: 3000
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/user_management
-      JWT_SECRET: your-secret-key-change-in-production
-      JWT_EXPIRES_IN: 24h
       NODE_ENV: development
     ports:
       - "3000:3000"
