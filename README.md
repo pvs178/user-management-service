@@ -29,20 +29,8 @@ JWT_EXPIRES_IN=24h
 
 ### Generating JWT Keys
 
-The service uses RS256 algorithm (RSA with SHA-256) for JWT signing. Generate key pair:
-
 ```bash
 ./scripts/generate-jwt-keys.sh
-```
-
-Or manually using OpenSSL:
-
-```bash
-# Generate private key
-openssl genrsa -out jwt-private.pem 2048
-
-# Generate public key
-openssl rsa -in jwt-private.pem -pubout -out jwt-public.pem
 ```
 
 Then add the keys to `.env` file (keep private key secure, never commit it).
@@ -120,7 +108,7 @@ npm start
 #### Block User
 - **PATCH** `/api/users/:id/block`
 - **Headers:** `Authorization: Bearer <token>`
-- **Access:** Owner or Admin
+- **Access:** Admin only
 - **Response:** `{ "id": "...", "isActive": false, ... }`
 
 ### Health Check

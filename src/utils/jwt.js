@@ -11,7 +11,7 @@ export function generateToken(payload) {
   }
 
   return jwt.sign(payload, privateKey, {
-    algorithm: 'RS256', // RSA with SHA-256
+    algorithm: 'RS256',
     expiresIn: process.env.JWT_EXPIRES_IN || '24h',
   })
 }
@@ -28,7 +28,7 @@ export function verifyToken(token) {
     }
 
     return jwt.verify(token, publicKey, {
-      algorithms: ['RS256'], // RSA with SHA-256
+      algorithms: ['RS256'],
     })
   } catch (error) {
     return null
