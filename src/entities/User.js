@@ -57,11 +57,5 @@ export const User = new EntitySchema({
       nullable: false,
     },
   },
-  indices: [
-    {
-      name: 'IDX_user_email',
-      columns: ['email'],
-    },
-  ],
 })
 
